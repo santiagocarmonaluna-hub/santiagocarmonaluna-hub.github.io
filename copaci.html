@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Ciudadana</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- PANTALLA DE INICIO DE SESIÓN -->
+    <div id="loginScreen" class="login-screen">
+
+        <div class="login-box">
+
+            <div class="logo">🏙️</div>
+
+            <h1>Gestión Ciudadana</h1>
+
+            <p class="subtitulo">
+                Reporta problemas de tu comunidad
+            </p>
+
+            <form onsubmit="iniciarSesion(event)">
+
+                <label for="usuario">Nombre de usuario</label>
+                <input 
+                    type="text" 
+                    id="usuario" 
+                    placeholder="Ingresa tu nombre"
+                    required
+                >
+
+                <label for="correo">Correo electrónico</label>
+                <input 
+                    type="email" 
+                    id="correo" 
+                    placeholder="ejemplo@correo.com"
+                    required
+                >
+
+                <button type="submit" class="btn-principal">
+                    Ingresar
+                </button>
+
+            </form>
+
+            <p id="mensajeLogin"></p>
+
+            <small>
+                Plataforma comunitaria de reportes ciudadanos
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- PÁGINA PRINCIPAL -->
+    <div id="app" class="oculto">
+
+        <!-- MENÚ -->
+        <header class="navbar">
+
+            <div class="logo-menu">
+                🏙️ Gestión Ciudadana
+            </div>
+
+            <nav>
+                <a href="#inicio">Inicio</a>
+                <a href="#reportar">Reportar</a>
+                <a href="#reportes">Reportes</a>
+                <a href="#informacion">Información</a>
+            </nav>
+
+            <button class="btn-salir" onclick="cerrarSesion()">
+                Salir
+            </button>
+
+        </header>
+
+
+        <!-- INICIO -->
+        <section id="inicio" class="hero">
+
+            <div class="hero-texto">
+
+                <span class="etiqueta">
+                    TU COMUNIDAD, TU VOZ
+                </span>
+
+                <h1>
+                    Juntos podemos mejorar
+                    nuestra comunidad
+                </h1>
+
+                <p>
+                    Reporta baches y otros problemas de tu localidad
+                    para ayudar a mantener nuestras calles en mejores
+                    condiciones.
+                </p>
+
+                <a href="#reportar" class="btn-principal">
+                    Reportar un problema
+                </a>
+
+            </div>
+
+            <div class="hero-icon">
+                🏙️
+            </div>
+
+        </section>
+
+
+        <!-- ESTADÍSTICAS -->
+        <section class="estadisticas">
+
+            <div class="estadistica">
+                <span>📋</span>
+                <h3 id="totalReportes">0</h3>
+                <p>Reportes realizados</p>
+            </div>
+
+            <div class="estadistica">
+                <span>⚠️</span>
+                <h3 id="reportesAltos">0</h3>
+                <p>Riesgo alto</p>
+            </div>
+
+            <div class="estadistica">
+                <span>👥</span>
+                <h3>Comunidad</h3>
+                <p>Participación ciudadana</p>
+            </div>
+
+        </section>
+
+
+        <!-- REPORTAR -->
+        <section id="reportar" class="seccion">
+
+            <div class="titulo-seccion">
+                <span>📝</span>
+                <div>
+                    <h2>Reportar un bache</h2>
+                    <p>Ayúdanos a identificar problemas en nuestras calles.</p>
+                </div>
+            </div>
+
+
+            <div class="formulario">
+
+                <div class="campo">
+                    <label for="ubicacion">
+                        📍 Ubicación aproximada
+                    </label>
+
+                    <input 
+                        type="text"
+                        id="ubicacion"
+                        placeholder="Ejemplo: Calle Hidalgo #120"
+                    >
+                </div>
+
+
+                <div class="campo">
+                    <label for="riesgo">
+                        ⚠️ Nivel de riesgo
+                    </label>
+
+                    <select id="riesgo">
+
+                        <option value="">
+                            Selecciona una opción
+                        </option>
+
+                        <option value="Bajo">
+                            🟢 Bajo
+                        </option>
+
+                        <option value="Medio">
+                            🟡 Medio
+                        </option>
+
+                        <option value="Alto">
+                            🔴 Alto
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div class="campo campo-completo">
+
+                    <label for="descripcion">
+                        📝 Descripción
+                    </label>
+
+                    <textarea
+                        id="descripcion"
+                        placeholder="Describe el problema, por ejemplo: bache grande que ocupa parte del carril..."
+                    ></textarea>
+
+                </div>
+
+
+                <button 
+                    onclick="agregarReporte()"
+                    class="btn-principal"
+                >
+                    Enviar reporte
+                </button>
+
+                <p id="mensaje"></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- REPORTES -->
+        <section id="reportes" class="seccion">
+
+            <div class="titulo-seccion">
+
+                <span>📋</span>
+
+                <div>
+                    <h2>Reportes de la comunidad</h2>
+
+                    <p>
+                        Consulta los problemas reportados por los ciudadanos.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div id="listaReportes">
+
+                <div class="sin-reportes">
+
+                    <div>📭</div>
+
+                    <h3>No hay reportes todavía</h3>
+
+                    <p>
+                        Sé el primero en reportar un problema.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMACIÓN -->
+        <section id="informacion" class="seccion">
+
+            <div class="titulo-seccion">
+
+                <span>ℹ️</span>
+
+                <div>
+                    <h2>¿Cómo funciona?</h2>
+
+                    <p>
+                        Participar es muy sencillo.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="pasos">
+
+                <div class="paso">
+                    <div class="numero">1</div>
+                    <h3>Identifica</h3>
+                    <p>
+                        Encuentra un bache o problema en tu comunidad.
+                    </p>
+                </div>
+
+
+                <div class="paso">
+                    <div class="numero">2</div>
+                    <h3>Reporta</h3>
+                    <p>
+                        Ingresa la ubicación, riesgo y descripción.
+                    </p>
+                </div>
+
+
+                <div class="paso">
+                    <div class="numero">3</div>
+                    <h3>Participa</h3>
+                    <p>
+                        Tu reporte ayuda a identificar las necesidades
+                        de la comunidad.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div>
+                <strong>🏙️ Gestión Ciudadana</strong>
+
+                <p>
+                    Una comunidad más informada y participativa.
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    Página creada por Santiago
+                </p>
+
+                <p>
+                    © 2026 Gestión Ciudadana
+                </p>
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
